@@ -15,6 +15,7 @@ public class ElasticsearchService {
     @Autowired
     private ArticleRepository articleRepository;
 
+    @Autowired
     private ElasticsearchOperations elasticsearchOperations;
 
     public ElasticsearchService(ElasticsearchOperations elasticsearchOperations) {
