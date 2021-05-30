@@ -1,34 +1,25 @@
 package com.milko.elastic.service;
 
-import com.milko.elastic.model.Article;
-import com.milko.elastic.model.Author;
-import com.milko.elastic.repository.ArticleRepository;
+import com.milko.elastic.model.Product;
+import com.milko.elastic.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Service;
 
-import static java.util.Arrays.asList;
+import java.util.List;
 
 @Service
 public class ElasticsearchService {
 
     @Autowired
-    private ArticleRepository articleRepository;
+    private ProductRepository productRepository;
 
-    @Autowired
-    private ElasticsearchOperations elasticsearchOperations;
+    public void find() {
+        List<Product> products = productRepository.findByNameContaining("heli");
 
-    public ElasticsearchService(ElasticsearchOperations elasticsearchOperations) {
-        this.elasticsearchOperations = elasticsearchOperations;
-    }
-
-    public void find (){
-        elasticsearchOperations.indexOps(Article.class).create();
-
-        Article article = new Article("Spring Data Elasticsearch");
-        article.setAuthors(asList(new Author("John Smith"), new Author("John Doe")));
-        articleRepository.save(article);
-
-        System.out.println("hoi");
+        System.out.println("Found: " + products.size());
+        for (Product product : products) {
+            System.out.println(product.getName());
+        }
     }
 }
