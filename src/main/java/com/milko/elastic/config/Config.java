@@ -21,7 +21,7 @@ public class Config extends AbstractElasticsearchConfiguration {
         final ClientConfiguration clientConfiguration =
                 ClientConfiguration
                         .builder()
-                        .connectedTo("localhost:9200")
+                        .connectedTo("172.19.120.131:443")
                         .build();
 
         return RestClients
